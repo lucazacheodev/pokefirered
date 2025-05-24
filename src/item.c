@@ -272,6 +272,10 @@ bool8 RemoveBagItem(u16 itemId, u16 count)
     if (itemId == ITEM_NONE)
         return FALSE;
 
+    // TMs are not removed from the bag when used.
+    if(ItemId_GetPocket(itemId) == POCKET_TM_CASE)
+        return TRUE;
+    
     pocket = ItemId_GetPocket(itemId) - 1;
     // Check for item slots that contain the item
     for (i = 0; i < gBagPockets[pocket].capacity; i++)
