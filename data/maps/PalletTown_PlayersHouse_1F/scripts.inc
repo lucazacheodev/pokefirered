@@ -1,7 +1,46 @@
 .equ LOCALID_MOM, 1
 
 PalletTown_PlayersHouse_1F_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PalletTown_PlayersHouse_1F_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, PalletTown_PlayersHouse_1F_OnFrame
 	.byte 0
+
+PalletTown_PlayersHouse_1F_OnTransition::
+	end
+
+PalletTown_PlayersHouse_1F_OnFrame::
+	map_script_2 VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_1F, 0, PalletTown_PlayersHouse_1F_EventScript_GetRunningShoes
+	.2byte 0
+
+PalletTown_PlayersHouse_1F_EventScript_GetRunningShoes::
+	lockall
+	setvar VAR_MAP_SCENE_PALLET_TOWN_PLAYERS_HOUSE_1F, 1
+	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkDown2
+	waitmovement 0
+	applymovement LOCALID_MOM, Common_Movement_WalkRight
+	waitmovement 0
+	applymovement LOCALID_MOM, Common_Movement_FacePlayer
+	waitmovement 0
+	msgbox PalletTown_PlayersHouse_1F_Text_OhPlayerWait
+	closemessage
+	applymovement LOCALID_MOM, Common_Movement_WalkInPlaceFasterLeft
+	waitmovement 0
+	msgbox PalletTown_PlayersHouse_1F_Text_GiveRunningShoesFromMom
+	closemessage
+	playfanfare MUS_OBTAIN_KEY_ITEM
+	message PalletTown_PlayersHouse_1F_Text_ReceivedRunningShoesFromMom
+	waitmessage
+	waitfanfare
+	msgbox PalletTown_PlayersHouse_1F_Text_SwitchedShoesWithRunningShoes
+	special DisableMsgBoxWalkaway
+	signmsg
+	msgbox PalletTown_PlayersHouse_1F_Text_ExplainRunningShoes
+	closemessage
+	setflag FLAG_SYS_B_DASH
+	setflag FLAG_HIDE_PEWTER_CITY_RUNNING_SHOES_GUY
+	setvar VAR_MAP_SCENE_PEWTER_CITY, 2
+	releaseall
+	end
 
 PalletTown_PlayersHouse_1F_EventScript_Mom::
 	lock
