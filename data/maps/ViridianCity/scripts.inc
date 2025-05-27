@@ -98,15 +98,6 @@ ViridianCity_EventScript_OldManGymLeaderReturned::
 	release
 	end
 
-ViridianCity_EventScript_TutorialOldMan::
-	lock
-	faceplayer
-	goto_if_set FLAG_BADGE01_GET, ViridianCity_EventScript_AskIfTeachyTVHelpful
-	goto_if_ge VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2, ViridianCity_EventScript_TutorialCompleted
-	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 1, ViridianCity_EventScript_TutorialStart
-	goto_if_eq VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 0, ViridianCity_EventScript_TutorialNotReady
-	end
-
 ViridianCity_EventScript_AskIfTeachyTVHelpful::
 	msgbox ViridianCity_Text_HowsTeachyTVHelping, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, ViridianCity_EventScript_TeachyTVNotHelpful
@@ -121,11 +112,6 @@ ViridianCity_EventScript_TeachyTVNotHelpful::
 
 ViridianCity_EventScript_TutorialCompleted::
 	msgbox ViridianCity_Text_WeakenMonsFirstToCatch
-	release
-	end
-
-ViridianCity_EventScript_TutorialStart::
-	call ViridianCity_EventScript_DoTutorialBattle
 	release
 	end
 
@@ -203,39 +189,3 @@ ViridianCity_Movement_WalkDown::
 	walk_down
 	step_end
 
-ViridianCity_EventScript_TutorialTriggerLeft::
-	lockall
-	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	call ViridianCity_EventScript_DoTutorialBattle
-	release
-	end
-
-ViridianCity_EventScript_TutorialTriggerRight::
-	lockall
-	textcolor NPC_TEXT_COLOR_MALE
-	applymovement LOCALID_TUTORIAL_MAN, Common_Movement_WalkInPlaceFasterRight
-	waitmovement 0
-	applymovement OBJ_EVENT_ID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
-	waitmovement 0
-	call ViridianCity_EventScript_DoTutorialBattle
-	release
-	end
-
-ViridianCity_EventScript_DoTutorialBattle::
-	msgbox ViridianCity_Text_ShowYouHowToCatchMons
-	closemessage
-	goto_if_questlog EventScript_ReleaseEnd
-	special QuestLog_CutRecording
-	special StartOldManTutorialBattle
-	waitstate
-	lock
-	faceplayer
-	msgbox ViridianCity_Text_ThatWasEducationalTakeThis
-	setvar VAR_MAP_SCENE_VIRIDIAN_CITY_OLD_MAN, 2
-	giveitem ITEM_TEACHY_TV
-	msgbox ViridianCity_Text_WatchThatToLearnBasics
-	return
