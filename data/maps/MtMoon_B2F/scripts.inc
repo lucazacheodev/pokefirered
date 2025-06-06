@@ -61,6 +61,7 @@ MtMoon_B2F_EventScript_DomeFossil::
 	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
 	removeobject LOCALID_DOME_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_DOME_FOSSIL
 	closemessage
 	release
 	end
@@ -79,6 +80,7 @@ MtMoon_B2F_EventScript_HelixFossil::
 	removeobject LOCALID_HELIX_FOSSIL
 	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
 	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
+	setflag FLAG_GOT_HELIX_FOSSIL
 	closemessage
 	release
 	end
