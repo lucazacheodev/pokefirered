@@ -112,7 +112,8 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene::
 	waitmessage
 	waitfanfare
 	call EventScript_RestorePrevTextColor
-	special EnableNationalPokedex
+	@ Disabled National Pokedex functionality
+	@ special EnableNationalPokedex
 	msgbox PalletTown_ProfessorOaksLab_Text_OakMustReallyWorkToFillPokedex
 	msgbox PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex
 	closemessage
@@ -123,7 +124,7 @@ PalletTown_ProfessorOaksLab_EventScript_NationalDexScene::
 	call_if_eq VAR_FACING, DIR_WEST, PalletTown_ProfessorOaksLab_EventScript_RivalExit
 	removeobject LOCALID_RIVAL
 	fadedefaultbgm
-	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
+	@ setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 8
 	releaseall
 	end
 
@@ -343,25 +344,22 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattleSquirtle::
 	end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleLeft::
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleMid::
-	walk_left
-	walk_left
-	walk_left
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleSquirtleRight::
-	walk_left
-	walk_left
+	walk_right
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
@@ -396,28 +394,22 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattleCharmander::
 	end
 
 PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderLeft::
-	walk_left
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderMid::
-	walk_left
-	walk_left
-	walk_left
-	walk_left
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_ApproachForBattleCharmanderRight::
-	walk_left
-	walk_left
-	walk_left
+	walk_right
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
@@ -452,22 +444,22 @@ PalletTown_ProfessorOaksLab_EventScript_RivalBattleBulbasaur::
 	end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurLeft::
-	walk_left
-	walk_left
-	walk_left
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurMid::
-	walk_left
-	walk_left
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
 
 PalletTown_ProfessorOaksLab_Movement_RivalApproachForBattleBulbasaurRight::
-	walk_left
+	walk_right
+	walk_right
+	walk_down
 	walk_down
 	walk_down
 	step_end
@@ -792,6 +784,8 @@ PalletTown_ProfessorOaksLab_EventScript_RatePokedexOrTryGiveBalls::
 PalletTown_ProfessorOaksLab_EventScript_RatePokedex::
 	call PokedexRating_EventScript_RateInPerson
 	goto_if_set FLAG_OAK_SAW_DEX_COMPLETION, PalletTown_ProfessorOaksLab_EventScript_DexCompleted
+	goto_if_unset FLAG_GOT_MEW, PalletTown_ProfessorOaksLab_EventScript_OakGivesMew
+	goto_if_set FLAG_GOT_MEW, PalletTown_ProfessorOaksLab_EventScript_AlreadyGotMew
 	release
 	end
 
@@ -1081,9 +1075,8 @@ PalletTown_ProfessorOaksLab_EventScript_BulbasaurBall::
 	setvar PLAYER_STARTER_SPECIES, SPECIES_BULBASAUR
 	setvar RIVAL_STARTER_SPECIES, SPECIES_CHARMANDER
 	setvar RIVAL_STARTER_ID, LOCALID_CHARMANDER_BALL
-	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
-	msgbox PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
 	release
 	end
 
@@ -1147,9 +1140,7 @@ EventScript_GiveNicknameToStarter::
 
 PalletTown_ProfessorOaksLab_EventScript_RivalPicksStarter::
 	closemessage
-	goto_if_eq PLAYER_STARTER_NUM, 0, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander
-	goto_if_eq PLAYER_STARTER_NUM, 1, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur
-	goto_if_eq PLAYER_STARTER_NUM, 2, PalletTown_ProfessorOaksLab_EventScript_RivalWalksToSquirtle
+	goto PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_RivalWalksToCharmander::
@@ -1171,15 +1162,6 @@ PalletTown_ProfessorOaksLab_EventScript_RivalWalksToBulbasaur::
 	end
 
 PalletTown_ProfessorOaksLab_EventScript_RivalTakesStarter::
-	textcolor NPC_TEXT_COLOR_MALE
-	msgbox PalletTown_ProfessorOaksLab_Text_RivalIllTakeThisOneThen
-	removeobject RIVAL_STARTER_ID
-	textcolor NPC_TEXT_COLOR_NEUTRAL
-	bufferspeciesname STR_VAR_1, RIVAL_STARTER_SPECIES
-	message PalletTown_ProfessorOaksLab_Text_RivalReceivedMonFromOak
-	waitmessage
-	playfanfare MUS_OBTAIN_KEY_ITEM
-	waitfanfare
 	setvar VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3
 	call_if_set FLAG_OPENED_START_MENU, PalletTown_ProfessorOaksLab_EventScript_ReadyEndSignLadyScene
 	release
@@ -1224,9 +1206,8 @@ PalletTown_ProfessorOaksLab_EventScript_SquirtleBall::
 	setvar PLAYER_STARTER_SPECIES, SPECIES_SQUIRTLE
 	setvar RIVAL_STARTER_SPECIES, SPECIES_BULBASAUR
 	setvar RIVAL_STARTER_ID, LOCALID_BULBASAUR_BALL
-	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
-	msgbox PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
 	release
 	end
 
@@ -1237,14 +1218,8 @@ PalletTown_ProfessorOaksLab_EventScript_CharmanderBall::
 	setvar PLAYER_STARTER_SPECIES, SPECIES_CHARMANDER
 	setvar RIVAL_STARTER_SPECIES, SPECIES_SQUIRTLE
 	setvar RIVAL_STARTER_ID, LOCALID_SQUIRTLE_BALL
-	goto_if_ge VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_LastPokeBall
 	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 2, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
-	msgbox PalletTown_ProfessorOaksLab_Text_ThoseArePokeBalls
-	release
-	end
-
-PalletTown_ProfessorOaksLab_EventScript_LastPokeBall::
-	msgbox PalletTown_ProfessorOaksLab_Text_OaksLastMon
+	goto_if_eq VAR_MAP_SCENE_PALLET_TOWN_PROFESSOR_OAKS_LAB, 3, PalletTown_ProfessorOaksLab_EventScript_ConfirmStarterChoice
 	release
 	end
 
@@ -1306,4 +1281,64 @@ PalletTown_ProfessorOaksLab_EventScript_RightSign::
 PalletTown_ProfessorOaksLab_EventScript_RightSignAlt::
 	msgbox PalletTown_ProfessorOaksLab_Text_AllMonTypesHaveStrongAndWeakPoints
 	releaseall
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_OakGivesMew::
+	lock
+	faceplayer
+	goto_if_set FLAG_GOT_MEW, PalletTown_ProfessorOaksLab_EventScript_AlreadyGotMew
+	msgbox PalletTown_ProfessorOaksLab_Text_OakGiveMew
+	closemessage
+	setvar VAR_TEMP_1, SPECIES_MEW
+	givemon SPECIES_MEW, 5
+	goto_if_eq VAR_RESULT, 0, PalletTown_ProfessorOaksLab_EventScript_ReceiveMewParty
+	goto_if_eq VAR_RESULT, 1, PalletTown_ProfessorOaksLab_EventScript_ReceiveMewPC
+	goto_if_eq VAR_RESULT, 2, EventScript_NoMoreRoomForPokemon
+	release
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiveMewParty::
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_LEVEL_UP
+	message PalletTown_ProfessorOaksLab_Text_ObtainedMewFromOak
+	waitmessage
+	waitfanfare
+	bufferspeciesname STR_VAR_1, SPECIES_MEW
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, PalletTown_ProfessorOaksLab_EventScript_EndReceiveMew
+	call EventScript_GetGiftMonPartySlot
+	call EventScript_ChangePokemonNickname
+	goto PalletTown_ProfessorOaksLab_EventScript_EndReceiveMew
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_ReceiveMewPC::
+	textcolor NPC_TEXT_COLOR_NEUTRAL
+	playfanfare MUS_LEVEL_UP
+	message PalletTown_ProfessorOaksLab_Text_ObtainedMewFromOak
+	waitmessage
+	waitfanfare
+	bufferspeciesname STR_VAR_1, SPECIES_MEW
+	msgbox Text_GiveNicknameToThisMon, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, PalletTown_ProfessorOaksLab_EventScript_MewTransferredToPC
+	call EventScript_NameReceivedBoxMon
+	goto PalletTown_ProfessorOaksLab_EventScript_MewTransferredToPC
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_MewTransferredToPC::
+	call EventScript_TransferredToPC
+	goto PalletTown_ProfessorOaksLab_EventScript_EndReceiveMew
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_EndReceiveMew::
+	textcolor NPC_TEXT_COLOR_MALE
+	msgbox PalletTown_ProfessorOaksLab_Text_ExplainMew
+	closemessage
+	setflag FLAG_GOT_MEW
+	release
+	end
+
+PalletTown_ProfessorOaksLab_EventScript_AlreadyGotMew::
+	msgbox PalletTown_ProfessorOaksLab_Text_YouGotThemAll
+	closemessage
+	release
 	end

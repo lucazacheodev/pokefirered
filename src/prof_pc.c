@@ -18,6 +18,7 @@ extern const u8 PokedexRating_Text_LessThan120[];
 extern const u8 PokedexRating_Text_LessThan130[];
 extern const u8 PokedexRating_Text_LessThan140[];
 extern const u8 PokedexRating_Text_LessThan150[];
+extern const u8 PokedexRating_Text_MissingMew[];
 extern const u8 PokedexRating_Text_Complete[];
 
 u16 GetPokedexCount(void)
@@ -88,10 +89,10 @@ static const u8 *GetProfOaksRatingMessageByCount(u16 count)
     {
         // Mew doesn't count for completing the pokedex
         if (GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_MEW), 1))
-            return PokedexRating_Text_LessThan150;
+            return PokedexRating_Text_MissingMew;
 
         gSpecialVar_Result = TRUE;
-        return PokedexRating_Text_Complete;
+        return PokedexRating_Text_MissingMew;
     }
 
     if (count == KANTO_DEX_COUNT)

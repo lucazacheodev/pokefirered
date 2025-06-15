@@ -210,7 +210,8 @@ bool8 MEScrCmd_initramscript(struct ScriptContext *ctx)
 
 bool8 MEScrCmd_givenationaldex(struct ScriptContext *ctx)
 {
-    EnableNationalPokedex();
+    // Disabled National Pokedex functionality
+    // EnableNationalPokedex();
     StringExpandPlaceholders(gStringVar4, gText_MysteryGiftNationalDex);
     ctx->data[2] = 2;
     return FALSE;

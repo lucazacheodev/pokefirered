@@ -19,20 +19,47 @@ IndigoPlateau_PokemonCenter_1F_EventScript_CheckBlockDoor::
 IndigoPlateau_PokemonCenter_1F_EventScript_DoorGuard::
 	lock
 	faceplayer
-	specialvar VAR_RESULT, IsNationalPokedexEnabled
-	goto_if_eq VAR_RESULT, TRUE, IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete
+	goto_if_set FLAG_SYS_GAME_CLEAR, IndigoPlateau_PokemonCenter_1F_EventScript_CheckDifficulty
 	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_CheckSeviiIslandComplete::
-	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete
-	msgbox IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing
+IndigoPlateau_PokemonCenter_1F_EventScript_CheckDifficulty::
+	goto_if_set FLAG_SYS_CAN_LINK_WITH_RS, IndigoPlateau_PokemonCenter_1F_EventScript_AskLowerDifficulty
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_AskIncreaseDifficulty
+	yesnobox 20, 8
+	goto_if_eq VAR_RESULT, YES, IndigoPlateau_PokemonCenter_1F_EventScript_IncreaseDifficulty
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_KeepCurrentDifficulty
+	waitmessage
+	closemessage
 	release
 	end
 
-IndigoPlateau_PokemonCenter_1F_EventScript_SeviiIslandComplete::
-	msgbox IndigoPlateau_PokemonCenter_1F_Text_FaceEliteFourGoodLuck
+IndigoPlateau_PokemonCenter_1F_EventScript_IncreaseDifficulty::
+	setflag FLAG_SYS_CAN_LINK_WITH_RS
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_IncreasedDifficulty
+	waitmessage
+	closemessage
+	call EventScript_ResetEliteFourEnd
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_AskLowerDifficulty::
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_AskDecreaseDifficulty
+	yesnobox 20, 8
+	goto_if_eq VAR_RESULT, YES, IndigoPlateau_PokemonCenter_1F_EventScript_DecreaseDifficulty
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_KeepCurrentDifficulty
+	waitmessage
+	closemessage
+	release
+	end
+
+IndigoPlateau_PokemonCenter_1F_EventScript_DecreaseDifficulty::
+	clearflag FLAG_SYS_CAN_LINK_WITH_RS
+	msgbox IndigoPlateau_PokemonCenter_1F_Text_DecreasedDifficulty
+	waitmessage
+	closemessage
+	call EventScript_ResetEliteFourEnd
 	release
 	end
 

@@ -41,3 +41,29 @@ IndigoPlateau_PokemonCenter_1F_Text_LancesCousinGymLeaderFarAway::
     .string "a cousin who's a GYM LEADER\l"
     .string "somewhere far away.$"
 
+IndigoPlateau_PokemonCenter_1F_Text_AskIncreaseDifficulty::
+    .string "Would you like to challenge\n"
+    .string "a stronger version of the\l"
+    .string "ELITE FOUR and CHAMPION?$"
+
+IndigoPlateau_PokemonCenter_1F_Text_IncreasedDifficulty::
+    .string "The ELITE FOUR and CHAMPION\n"
+    .string "will now use stronger teams!\p"
+    .string "Good luck with your challenge!$"
+
+IndigoPlateau_PokemonCenter_1F_Text_AskDecreaseDifficulty::
+    .string "The ELITE FOUR and CHAMPION\n"
+    .string "are currently using their\l"
+    .string "strongest teams.\p"
+    .string "Would you like them to use\n"
+    .string "their regular teams instead?$"
+
+IndigoPlateau_PokemonCenter_1F_Text_DecreasedDifficulty::
+    .string "The ELITE FOUR and CHAMPION\n"
+    .string "will now use their regular teams.\p"
+    .string "Good luck with your challenge!$"
+
+IndigoPlateau_PokemonCenter_1F_Text_KeepCurrentDifficulty::
+    .string "I understand. The difficulty\n"
+    .string "will remain the same.\p"
+    .string "Good luck with your challenge!$"

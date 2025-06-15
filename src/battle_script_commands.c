@@ -3166,6 +3166,7 @@ static void Cmd_getexp(void)
             calculatedExp = gSpeciesInfo[gBattleMons[gBattlerFainted].species].expYield * gBattleMons[gBattlerFainted].level / 7;
         
             *exp = SAFE_DIV(calculatedExp, viaSentIn);
+            *exp = *exp / 2; // Halved global XP 'cause of Team EXP Share
             if (*exp == 0)
                 *exp = 1;
                         

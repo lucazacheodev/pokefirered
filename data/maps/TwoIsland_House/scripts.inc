@@ -14,8 +14,6 @@ TwoIsland_House_EventScript_MoveManiac::
 	goto TwoIsland_House_EventScript_AskTutorMon
 	end
 
-
-
 TwoIsland_House_EventScript_AskTutorMon::
 	msgbox TwoIsland_House_Text_WantMeToTeachMove, MSGBOX_YESNO
 	goto_if_eq VAR_RESULT, NO, TwoIsland_House_EventScript_EndTutorMove

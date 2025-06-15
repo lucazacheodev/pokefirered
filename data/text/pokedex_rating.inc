@@ -82,6 +82,9 @@ PokedexRating_Text_LessThan150::
 	.string "I have nothing left to say!\n"
 	.string "You're the POKéMON PROFESSOR now!$"
 
+PokedexRating_Text_MissingMew::
+	.string "You got 150 Pokémons?!$"
+
 PokedexRating_Text_Complete::
 	.string "Your POKéDEX is entirely complete!\n"
 	.string "Congratulations!!$"

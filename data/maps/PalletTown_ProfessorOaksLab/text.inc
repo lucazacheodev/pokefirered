@@ -355,3 +355,32 @@ PalletTown_ProfessorOaksLab_Text_RivalIllCompleteThePokedex::
     .string "ONE ISLAND first…\p"
     .string "Anyways, I'm outta here!$"
 
+PalletTown_ProfessorOaksLab_Text_OakGiveMew::
+    .string "OAK: {PLAYER}!\n"
+    .string "You've accomplished something\n"
+    .string "incredible!\p"
+    .string "You've caught every KANTO POKéMON...\p"
+    .string "Except for one.\p"
+    .string "There is a mythical POKéMON\n"
+    .string "that has eluded all trainers.\p"
+    .string "Its name is MEW.\p"
+    .string "But today, I have a special gift\n"
+    .string "for you.\p"
+    .string "Take this, as a reward for your\n"
+    .string "amazing dedication!$"
+
+PalletTown_ProfessorOaksLab_Text_ObtainedMewFromOak::
+    .string "{PLAYER} received MEW\n"
+    .string "from PROF. OAK!$"
+
+PalletTown_ProfessorOaksLab_Text_ExplainMew::
+    .string "MEW is a very rare POKéMON.\n"
+    .string "It is said to contain the genetic\p"
+    .string "codes of all POKéMON.\n"
+    .string "Treat it with care!$"
+
+PalletTown_ProfessorOaksLab_Text_YouGotThemAll::
+    .string "OAK: Amazing! You truly got them all!\n"
+    .string "The KANTO POKéDEX is complete!\p"
+    .string "Your dedication is inspiring!$"
+    .string "Placeholder YouGotThemAll!$"

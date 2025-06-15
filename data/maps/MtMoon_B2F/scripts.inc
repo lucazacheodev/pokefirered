@@ -62,16 +62,10 @@ MtMoon_B2F_EventScript_DomeFossil::
 	removeobject LOCALID_DOME_FOSSIL
 	giveitem_msg MtMoon_B2F_Text_ObtainedDomeFossil, ITEM_DOME_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_DOME_FOSSIL
+	call MtMoon_B2F_EventScript_CheckBothFossils
 	closemessage
 	release
 	end
-
-MtMoon_B2F_Movement_MiguelToHelixFossil::
-	walk_right
-	walk_up
-	walk_up
-	walk_up
-	step_end
 
 MtMoon_B2F_EventScript_HelixFossil::
 	lock
@@ -81,6 +75,20 @@ MtMoon_B2F_EventScript_HelixFossil::
 	goto_if_eq VAR_RESULT, NO, MtMoon_B2F_EventScript_DontTakeFossil
 	giveitem_msg MtMoon_B2F_Text_ObtainedHelixFossil, ITEM_HELIX_FOSSIL, 1, MUS_OBTAIN_KEY_ITEM
 	setflag FLAG_GOT_HELIX_FOSSIL
+	call MtMoon_B2F_EventScript_CheckBothFossils
+	closemessage
+	release
+	end
+
+MtMoon_B2F_EventScript_CheckBothFossils::
+	checkflag FLAG_GOT_DOME_FOSSIL
+	goto_if FALSE, MtMoon_B2F_EventScript_CheckBothFossils_End
+	checkflag FLAG_GOT_HELIX_FOSSIL
+	goto_if FALSE, MtMoon_B2F_EventScript_CheckBothFossils_End
+	setflag FLAG_GOT_FOSSIL_FROM_MT_MOON
+
+MtMoon_B2F_EventScript_CheckBothFossils_End::
+	return
 	closemessage
 	release
 	end

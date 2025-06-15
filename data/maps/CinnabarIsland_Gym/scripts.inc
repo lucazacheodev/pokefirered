@@ -65,8 +65,8 @@ CinnabarIsland_Gym_EventScript_DefeatedBlaine::
 	setflag FLAG_DEFEATED_BLAINE
 	setflag FLAG_BADGE07_GET
 	setrespawn SPAWN_CINNABAR_ISLAND
-	setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1
-	clearflag FLAG_HIDE_CINNABAR_BILL
+	@ Rimosso setvar VAR_MAP_SCENE_CINNABAR_ISLAND, 1 per bloccare l'accesso alle Sevii Islands
+	@ Rimosso clearflag FLAG_HIDE_CINNABAR_BILL per mantenere Bill nascosto
 	set_gym_trainers 7
 	goto CinnabarIsland_Gym_EventScript_GiveTM38
 	end

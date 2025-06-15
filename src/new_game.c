@@ -1,6 +1,7 @@
 #include "global.h"
 #include "gflib.h"
 #include "random.h"
+// #include "pokedex.h"
 #include "overworld.h"
 #include "constants/maps.h"
 #include "load_save.h"
@@ -32,6 +33,17 @@
 
 // this file's functions
 static void ResetMiniGamesResults(void);
+// Use it for testing Mew Event
+// static void FillPokedexAtStart(void)
+// {
+//     u16 species;
+    
+//     for (species = 1; species <= 150; species++)
+//     {
+//         GetSetPokedexFlag(species, FLAG_SET_SEEN);
+//         GetSetPokedexFlag(species, FLAG_SET_CAUGHT);
+//     }
+// }
 
 // EWRAM vars
 EWRAM_DATA bool8 gDifferentSaveFile = FALSE;
@@ -61,7 +73,7 @@ static void SetDefaultOptions(void)
 {
     gSaveBlock2Ptr->optionsTextSpeed = OPTIONS_TEXT_SPEED_FAST;
     gSaveBlock2Ptr->optionsWindowFrameType = 0;
-    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_MONO;
+    gSaveBlock2Ptr->optionsSound = OPTIONS_SOUND_STEREO;
     gSaveBlock2Ptr->optionsBattleStyle = OPTIONS_BATTLE_STYLE_SHIFT;
     gSaveBlock2Ptr->optionsBattleSceneOff = FALSE;
     gSaveBlock2Ptr->regionMapZoom = FALSE;
@@ -123,6 +135,7 @@ void NewGameInitData(void)
     InitPlayerTrainerId();
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
+    //FillPokedexAtStart();
     InitEventData();
     ResetFameChecker();
     SetMoney(&gSaveBlock1Ptr->money, 3000);
@@ -130,7 +143,7 @@ void NewGameInitData(void)
     ClearPlayerLinkBattleRecords();
     InitHeracrossSizeRecord();
     InitMagikarpSizeRecord();
-    EnableNationalPokedex_RSE();
+    // EnableNationalPokedex_RSE(); Disabled National Pokedex functionality
     gPlayerPartyCount = 0;
     ZeroPlayerPartyMons();
     ResetPokemonStorageSystem();
